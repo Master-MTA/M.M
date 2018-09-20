@@ -254,3 +254,57 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 	
 	end
 end
+
+function dxGridListGetSelectedItem(grid)
+	if Elements[grid] and Elements[grid],type=='gridList'then
+	
+		return Elements[grid].selecteditem,Elements[grid].selectedcolumn
+	
+	end
+	return false
+end
+
+
+function dxGridListSetSelectedItem(grid,sel,col)
+	if Elements[grid] and Elements[grid],type=='gridList'then
+	
+	Elements[grid].selecteditem =sel
+	Elements[grid].selectedcolumn=col
+						
+						for m,s in ipairs (Elements[grid].rows[sel])do 
+							
+
+								Elements[grid].rows[sel][m].backcolor=tocolor(40,115,178,255)
+							
+						end
+							
+					for m,s in ipairs(Elements[grid].rows)do
+								
+							if sel~=m then
+								
+								for b,o in ipairs(Elements[grid].rows[m])do
+								
+								
+									Elements[grid].rows[m][b].backcolor=Elements[grid].rows[m][b].anothercolor
+								
+								end
+							end
+						end
+	
+		return true
+	
+	end
+	return false
+end
+
+
+function dxGridListGetItemText(grid,sel,col)
+	if Elements[grid] and Elements[grid],type=='gridList'then
+		local col=col or 1
+	
+		return Elements[grid].rows[sel][col].text
+	
+	end
+	return false
+end
+
