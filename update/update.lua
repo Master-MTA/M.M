@@ -1,7 +1,9 @@
 local check
 local UpdateAuto=false--to update M.M Auto
 local daystime=5---cheeck for new updates every 5 dates?
-
+local backupMeta=true--if you want to save old meta
+local backupStyleMeta=true--check if you want to save old meta style
+local checktime=1--every 3 menuite check if file downloaded or no
 if fileExists("update.cfg") then
 	check = fileOpen("update.cfg")
 else
@@ -32,7 +34,7 @@ function checkUpdate()
 						else
 							killTimer(updateTimer)
 						end
-					end,M.MConfig.updateCheckNoticeInterval*60000,0)
+					end,checktime*60000,0)
 				else
 					outputDebugString("[M.M]Current Version("..allstr..") is the latest!")
 				end
@@ -231,7 +233,7 @@ end)
 styleBackupStr = ""
 locator = [[	<export]]
 function backupStyleMapper()
-	if M.MConfig.backupMeta then
+	if backupMeta then
 		fileCopy("meta.xml","meta.xml.bak",true)
 	end
 	assert(fileExists("meta.xml"),"[M.M] Please rename the meta xml as meta.xml")
@@ -246,7 +248,7 @@ function backupStyleMapper()
 	if fileExists("styleMapperBackup.bak") then
 		fileDelete("styleMapperBackup.bak")
 	end
-	if M.MConfig.backupStyleMeta then
+	if backupStyleMeta then
 		local file = fileCreate("styleMapperBackup.bak")
 		fileWrite(file,styleBackupStr)
 		fileClose(file)
