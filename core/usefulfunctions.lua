@@ -561,3 +561,48 @@ return false
 
 end
 
+function dxSetPosition(el,mx,my)
+	if Elements[el] and Elements[el].x and Elements[el].y then
+
+		 Elements[el].x=mx
+		 Elements[el].y=my
+	return true
+	end
+return false
+
+end
+
+
+function dxGetPosition(el)
+	if Elements[el] and Elements[el].x and Elements[el].y then
+
+	return  Elements[el].x, Elements[el].y
+	
+	end
+return false
+
+end
+
+function dxSetSize(el,mx,my)
+	if Elements[el] and Elements[el].width and Elements[el].height then
+
+		 Elements[el].width=mx
+		 Elements[el].height=my
+	return true
+	end
+return false
+
+end
+
+
+function dxGetPosition(el)
+	if Elements[el] and Elements[el].width and Elements[el].height then
+
+	return  Elements[el].width, Elements[el].height
+	
+	end
+return false
+
+end
+
+
