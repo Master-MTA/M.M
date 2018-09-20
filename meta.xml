@@ -15,7 +15,7 @@
 	<script src='core/usefulfunctions.lua' type='client' chace='false'/>
 	<script src='core/client.lua' type='client' chace='false'/>
 	<script src='core/client2.lua' type='client' chace='false'/>
-	<script src='update/update.lua' type='client' chace='false'/>
+	<script src='update/update.lua' type='server' />
 	<min_mta_version client="1.3.0-9.04431" />
 		<oop>true</oop>
 </meta>
