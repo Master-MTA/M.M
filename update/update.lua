@@ -1,4 +1,7 @@
 local check
+local UpdateAuto=false--to update M.M Auto
+local daystime=5---cheeck for new updates every 5 dates?
+
 if fileExists("update.cfg") then
 	check = fileOpen("update.cfg")
 else
@@ -42,9 +45,9 @@ function checkUpdate()
 	end)
 end
 
-if M.MConfig.updateCheckAuto then
+if UpdateAuto then
 	checkUpdate()
-	updatePeriodTimer = setTimer(checkUpdate,M.MConfig.updateCheckInterval*3600000,0)
+	updatePeriodTimer = setTimer(checkUpdate,daystime*1000*60*60*24,0)
 end
 	
 addCommandHandler("updateM.M",function(player)
