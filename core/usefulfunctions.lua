@@ -541,3 +541,23 @@ function canIscrollTheGridList(grid,pr,old,scroll,inc)
 
 end
 
+
+function dxGetText(el)
+	if Elements[el] and Elements[el].text then
+
+		return Elements[el].text
+	
+	end
+return false
+
+end
+function dxSetText(el,tx)
+	if Elements[el] and Elements[el].text then
+
+		 Elements[el].text=tx
+	return true
+	end
+return false
+
+end
+
