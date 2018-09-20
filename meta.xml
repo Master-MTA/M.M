@@ -1,0 +1,21 @@
+﻿<meta>
+    <info author="Master_MTA" name="DXLib" version="0.0.1" type="misc"/>
+	<script src='variable.lua' type='client' chace='false'/>
+	<script src='elements/window.lua' type='client' chace='false'/>
+	<script src='elements/button.lua' type='client' chace='false'/>
+	<script src='elements/editbox.lua' type='client' chace='false'/>
+	<script src='elements/memo.lua' type='client' chace='false'/>
+	<script src='elements/label.lua' type='client' chace='false'/>
+	<script src='elements/checkbox.lua' type='client' chace='false'/>
+	<script src='elements/gridlist.lua' type='client' chace='false'/>
+	<script src='elements/scrollbar.lua' type='client' chace='false'/>
+	<script src='elements/progressbar.lua' type='client' chace='false'/>
+	<script src='elements/radiobutton.lua' type='client' chace='false'/>
+	<script src='core/events.lua' type='client' chace='false'/>
+	<script src='core/usefulfunctions.lua' type='client' chace='false'/>
+	<script src='core/client.lua' type='client' chace='false'/>
+	<script src='core/client2.lua' type='client' chace='false'/>
+	<script src='update/update.lua' type='client' chace='false'/>
+	<min_mta_version client="1.3.0-9.04431" />
+		<oop>true</oop>
+</meta>
