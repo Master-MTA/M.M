@@ -1,0 +1,6 @@
+addEvent('onClientDxClick',true)
+addEvent('onClientDxVisibleChange',true)
+addEvent('onClientDxScrollBarScrolled',true)
+addEvent('onClientDxScrollBarClicked',true)
+addEvent('onClientDxGridListRowEnter',true)
+addEvent('onClientDxGridListRowLeave',true)
