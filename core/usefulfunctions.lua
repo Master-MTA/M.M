@@ -219,7 +219,7 @@ end
 
 
 function dxSetVisible(element,stat)
-	if isElement(element) then
+	if Elements[element] then
 	
 		if not bannedelements[tostring(getElementType(element))] then
 				Elements[element].visible=stat
@@ -235,7 +235,7 @@ end
 
 
 function dxGetVisible(element)
-	if isElement(element) then
+	if Elements[element] then
 		return Elements[element].visible
 	else
 		outputDebugString('dxGetVisible Bad argument @1 expected element got '..type(element),3,255,0,0)
