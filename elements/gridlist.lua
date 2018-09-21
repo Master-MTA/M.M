@@ -256,7 +256,7 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 end
 
 function dxGridListGetSelectedItem(grid)
-	if Elements[grid] and Elements[grid],type=='gridList'then
+	if Elements[grid] and Elements[grid].type=='gridList'then
 	
 		return Elements[grid].selecteditem,Elements[grid].selectedcolumn
 	
@@ -266,7 +266,7 @@ end
 
 
 function dxGridListSetSelectedItem(grid,sel,col)
-	if Elements[grid] and Elements[grid],type=='gridList'then
+	if Elements[grid] and Elements[grid].type=='gridList'then
 	
 	Elements[grid].selecteditem =sel
 	Elements[grid].selectedcolumn=col
@@ -299,7 +299,7 @@ end
 
 
 function dxGridListGetItemText(grid,sel,col)
-	if Elements[grid] and Elements[grid],type=='gridList'then
+	if Elements[grid] and Elements[grid].type=='gridList'then
 		local col=col or 1
 	
 		return Elements[grid].rows[sel][col].text
