@@ -279,6 +279,15 @@ end,
 		
 	end,
 
+['Image']=function(v)
+	
+	if v.src then
+	
+		dxDrawImage (v.x,v.y,v.width,v.height,v.src,0,0,0,v.backcolor,true)
+	
+	end
+	
+	end,
 
 		
 
