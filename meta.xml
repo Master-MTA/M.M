@@ -30,6 +30,8 @@
 	<export function="dxCreateProgressBar" type="client" />
 	<export function="dxCreateRadioButton" type="client" />
 	<export function="dxCreateScrollBar" type="client" />
+	<export function="dxSetVisible" type="client" />
+	<export function="dxGetVisible" type="client" />
 	<export function="dxGetText" type="client" />
 	<export function="dxSetText" type="client" />
 	<export function="dxSetPosition" type="client" />
