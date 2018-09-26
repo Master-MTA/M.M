@@ -648,12 +648,50 @@ end
 
 function dxSetPosition(el,myownx,myowny)
 	if Elements[el] and Elements[el].x and Elements[el].y then
-		if myownx then
-		 Elements[el].x=myownx
+		
+		local oldx,oldy=Elements[el].x,Elements[el].y
+		
+		Elements[el].x=myownx
+		Elements[el].y=myowny
+		
+		local ch=getElementChildren(el)
+		
+		if #ch~=0 then
+			
+			for k,v in ipairs(ch) do
+			
+				if not bannedelements[getElementType(v)] then
+				
+					if oldx>myownx then
+					
+						Elements[v].x=Elements[v].x-(oldx-myownx)
+						
+						else
+						
+						Elements[v].x=Elements[v].x+(myownx-oldx)
+					
+					end
+					
+					
+					if oldy>myowny then
+					
+						Elements[v].y=Elements[v].y-(oldy-myowny)
+						
+						else
+						
+						Elements[v].y=Elements[v].y+(myowny-oldy)
+					
+					end
+					
+					
+			
+				end
+			
+			end
+			
 		end
-		 if myowny then
-		 Elements[el].y=myowny
-		 end
+		
+		
 	return true
 	end
 	
