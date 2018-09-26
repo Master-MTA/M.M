@@ -7,7 +7,7 @@ drawTable={
 
 			dxDrawDxWindow(v.x, v.y, v.width, v.height, v.barcolor,  v.backcolor,v.bordercolor,false)
 			
-			dxDrawText ( v.text, v.x+(v.width*6.5/100), v.y, v.x+v.width-(v.width*6.5/100), v.y+(v.height*5/100), v.titlecolor, 1.4, "default-bold" ,'center','center',true,false,true)
+			dxDrawText ( v.text, v.x+(v.width*6.5/100), v.y, v.x+v.width-(v.width*6.5/100), v.y+(v.height*5/100), v.titlecolor, v.sizeoftext, "default-bold" ,'center','center',true,false,true)
 end,
 ['Button']=function(v)
 				if isMouseInPosition(v.x,v.y,v.width,v.height) then
