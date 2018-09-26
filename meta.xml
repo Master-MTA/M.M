@@ -16,6 +16,7 @@
 	<script src='core/usefulfunctions.lua' type='client' chace='false'/>
 	<script src='core/client.lua' type='client' chace='false'/>
 	<script src='core/client2.lua' type='client' chace='false'/>
+	<script src='test.lua' type='client' chace='false'/>
 	<script src='update/update.lua' type='server' />
 	<min_mta_version server="1.5.4-9.11342" />
 	<min_mta_version client="1.5.4-9.11342" />
@@ -43,6 +44,44 @@
 	<export function="dxSetSize" type="client" />
 	<export function="dxGetSize" type="client" />
 	<export function="dxLabelGetColor" type="client" />
+	<export function="dxLabelSetHorizontalAlign" type="client" />
+	<export function="dxLabelSetVerticalAlign" type="client" />
+	<export function="dxProgressBarSetProgress" type="client" />
+	<export function="dxProgressBarGetProgress" type="client" />
+	<export function="dxProgressBarSetText" type="client" />
+	<export function="dxRadioButtonGetSelected" type="client" />
+	<export function="dxRadioButtonSetSelected" type="client" />
+	<export function="dxGidListAddColumn" type="client" />
+	<export function="dxGridListAddRow" type="client" />
+	<export function="dxGridListGetColumnWidth" type="client" />
+	<export function="dxGridListSetItemText" type="client" />
+	<export function="dxCheckBoxGetSelected" type="client" />
+	<export function="dxCheckBoxSetSelected" type="client" />
+	
+	<!--&Add Your Styles Here-->
+	<export function="dxCreateWindow" type="client" />
+	<export function="dxCreateButton" type="client" />
+	<export function="dxCreateCheckBox" type="client" />
+	<export function="dxCreateMemo" type="client" />
+	<export function="dxCreateLabel" type="client" />
+	<export function="dxCreateGridList" type="client" />
+	<export function="dxCreateEdit" type="client" />
+	<export function="dxCreateProgressBar" type="client" />
+	<export function="dxCreateRadioButton" type="client" />
+	<export function="dxCreateScrollBar" type="client" />
+	<export function="dxCreateImage" type="client" />
+	<export function="dxSetVisible" type="client" />
+	<export function="dxGetVisible" type="client" />
+	<export function="dxGetText" type="client" />
+	<export function="dxWindowIsMovable" type="client" />
+	<export function="dxWindowSetMovable" type="client" />
+	<export function="dxSetText" type="client" />
+	<export function="dxSetPosition" type="client" />
+	<export function="dxGetPosition" type="client" />
+	<export function="dxSetSize" type="client" />
+	<export function="dxGetSize" type="client" />
+	<export function="dxLabelGetColor" type="client" />
+	<export function="dxLabelSetColor" type="client" />
 	<export function="dxLabelSetHorizontalAlign" type="client" />
 	<export function="dxLabelSetVerticalAlign" type="client" />
 	<export function="dxProgressBarSetProgress" type="client" />
