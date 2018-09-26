@@ -33,7 +33,7 @@ end
 
 function dxLabelGetColor(label)
 
-	if Elements[grid] and Elements[grid].type=='Label' then
+	if Elements[label] and Elements[label].type=='Label' then
 	
 		return Elements[label].textcolor
 
@@ -46,7 +46,7 @@ end
 
 function  dxLabelSetHorizontalAlign (label,pos)
 
-	if Elements[grid] and Elements[grid].type=='Label' then
+	if Elements[label] and Elements[label].type=='Label' then
 	
 		Elements[label].positionh=pos
 	
@@ -62,7 +62,7 @@ end
 
 function  dxLabelSetVerticalAlign(label,pos)
 
-	if Elements[grid] and Elements[grid].type=='Label' then
+	if Elements[label] and Elements[label].type=='Label' then
 	
 		Elements[label].positiony=pos
 	
@@ -79,7 +79,7 @@ end
 
 function  dxLabelSetColor(label,color)
 
-	if Elements[grid] and Elements[grid].type=='Label' then
+	if Elements[label] and Elements[label].type=='Label' then
 	
 		Elements[label].textcolor=color
 	
