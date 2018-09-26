@@ -1,8 +1,9 @@
 
-function dxCreateEdit(x,y,width,height,text,baba,backcolor,textcolor,bordercolor)
+function dxCreateEdit(x,y,width,height,text,baba,backcolor,textcolor,bordercolor,anothercolor)
 local backcolor=backcolor  or tocolor(40,115,178,255)
 local textcolor=textcolor  or tocolor(255,255,255,255)
-local bordercolor=bordercolor  or tocolor(40,115,178,255)
+local bordercolor=bordercolor  or tocolor(255,255,255,255)
+local anothercolor=anothercolor or tocolor(0,0,0,255)
 local element=createElement('dxEdit')
 local baba=baba or false	
 local ismaxed=ismaxed or false	
@@ -30,13 +31,17 @@ local othertext=text
 		width=width,
 		height=height,
 		text=text,
+		anothercolor=anothercolor,
 		othertext=othertext,
 		baba=baba,
 		ismaxed=ismaxed,
+		orignalcolor=textcolor,
 		backcolor=backcolor,
 		textcolor=textcolor,
 		edit=edit,
-		position='left',
+		distanc1=0,
+		distanc2=0,
+		positiontext='left',
 		bordercolor=bordercolor,
 		visible=false,
 		isenabled=false,
