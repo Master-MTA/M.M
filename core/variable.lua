@@ -38,3 +38,5 @@ bannedelements={
  ['escape']=true,
  ['`']=true,
  }
+ 
+ local alltypes={'dxGidList','dxWindow','dxButton','dxCheckBox','dxLabel','dxRadioButton','dxEdit','dxScrollBar','dxProgressBar','dxMemo','dxImage'}
