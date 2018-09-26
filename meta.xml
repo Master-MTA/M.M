@@ -1,5 +1,5 @@
 <meta>
-    <info author="Master_MTA" name="DXLib" version="0.0.1" type="misc"/>
+    <info author="Master_MTA" name="DXLib" version="0.2" type="misc"/>
 	<script src='core/variable.lua' type='client' chace='false'/>
 	<script src='elements/window.lua' type='client' chace='false'/>
 	<script src='elements/button.lua' type='client' chace='false'/>
