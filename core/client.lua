@@ -969,7 +969,7 @@ addEventHandler('onClientCursorMove',root,function()
 	
 	for k,v in ipairs(createdElements)do
 	
-		if isMouseInPosition(Elements[v].x,Elements[v].y,Elements[v].width,Elements[v].height) then
+		if isMouseInPosition(Elements[v].x,Elements[v].y,Elements[v].width,Elements[v].height) and Elements[v].visible then
 		
 			if getElementType(v)=='dxWindow' then
 			
