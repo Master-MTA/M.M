@@ -35,6 +35,8 @@
 	<export function="dxSetVisible" type="client" />
 	<export function="dxGetVisible" type="client" />
 	<export function="dxGetText" type="client" />
+	<export function="dxWindowIsMovable" type="client" />
+	<export function="dxWindowSetMovable" type="client" />
 	<export function="dxSetText" type="client" />
 	<export function="dxSetPosition" type="client" />
 	<export function="dxGetPosition" type="client" />
