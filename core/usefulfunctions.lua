@@ -648,9 +648,12 @@ end
 
 function dxSetPosition(el,myownx,myowny)
 	if Elements[el] and Elements[el].x and Elements[el].y then
-		
+		if myownx then
 		 Elements[el].x=myownx
+		end
+		 if myowny then
 		 Elements[el].y=myowny
+		 end
 	return true
 	end
 	
