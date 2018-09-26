@@ -779,6 +779,18 @@ addEventHandler('onClientDxWindowMove',root,function(valx,valy,incx,incy)
 end)
 
 
+--------------------event on start
+addEventHandler('onClientResourceStart',resourceRoot,function()
+
+triggerEvent('onClientDxLibResourceStart',source)
+
+end)
+
+addEventHandler('onClientResourceStop',resourceRoot,function()
+
+triggerEvent('onClientDxLibResourceStop',source)
+
+end)
 
 
 addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy,checkx,valy)
