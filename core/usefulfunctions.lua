@@ -774,3 +774,20 @@ return 1---else
 end
 
 
+
+function getDXRootElements()
+local ta={}
+
+	for k,v in ipairs(alltypes)do
+	
+		for m,j in ipairs(getElementsByType(v,resourceRoot)) do
+		
+			table.insert(ta,j)
+		
+		end
+		
+	end
+	
+	return ta
+
+end
