@@ -682,6 +682,15 @@ return false
 
 end
 
+function dxGetSize(el,mx,my)
+	if Elements[el] and Elements[el].width and Elements[el].height then
+
+	return Elements[el].width,Elements[el].height
+	end
+return false
+
+end
+
 
 function dxGetPosition(el)
 	if Elements[el] and Elements[el].width and Elements[el].height then
