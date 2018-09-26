@@ -963,3 +963,99 @@ addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy
 	end		
 	
 end)
+
+
+addEventHandler('onClientCursorMove',root,function()
+	
+	for k,v in ipairs(createdElements)do
+	
+		if isMouseInPosition(Elements[v].x,Elements[v].y,Elements[v].width,Elements[v].height) then
+		
+			if getElementType(v)=='dxWindow' then
+			
+				local ch=getElementChildren(v)
+				
+					for i,val in ipairs(ch) do
+					
+						if isMouseInPosition(Elements[val].x,Elements[val].y,Elements[val].width,Elements[val].height) then
+						
+							Elements[val].isenterd=true
+
+							triggerEvent('onClientDxCursorEnter',val)
+							
+							return
+							
+						else
+						
+							if Elements[val].isenterd then
+							
+								Elements[val].isenterd=false
+							
+								triggerEvent('onClientDxCursorLeave',val)
+								
+							else
+								
+								if Elements[val].isenterd==nil then
+								
+									Elements[va].isenterd=false
+								
+								end
+							
+							end
+						
+						end
+						end
+						
+						triggerEvent('onClientDxCursorEnter',v)
+						
+						return
+						
+						else
+						
+						if Elements[v].isenterd then
+							
+								Elements[v].isenterd=false
+							
+								triggerEvent('onClientDxCursorLeave',v)
+								
+							else
+								
+								if Elements[v].isenterd==nil then
+								
+									Elements[v].isenterd=false
+								
+								end
+							
+							end
+						
+			
+			end
+			
+			triggerEvent('onClientDxCursorEnter',v)
+			
+			return
+						
+						else
+						
+						if Elements[v].isenterd then
+							
+								Elements[v].isenterd=false
+							
+								triggerEvent('onClientDxCursorLeave',v)
+								
+							else
+								
+								if Elements[v].isenterd==nil then
+								
+									Elements[v].isenterd=false
+								
+								end
+							
+							end
+			
+		end
+		
+	end
+
+end
+)
