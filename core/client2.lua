@@ -309,5 +309,3 @@ addEventHandler('onClientClick',root,function()
 	
 
 end)
-
-
