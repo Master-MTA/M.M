@@ -4,21 +4,10 @@
 
 drawTable={
 ['Window']=function(v)
-			dxDrawRectangle(v.x,v.y,v.width,v.height,v.backcolor,true)
 
-
-			dxDrawRectangle(v.x,v.y,v.width,(v.height*5/100),v.barcolor,true)
-
-			if v.btn then 
-				
-					dxDrawRectangle(v.x+v.width-(v.width*6.5/100),v.y,(v.width*6.5/100),(v.height*5/100),tocolor(255,0,0,255),true)
-					
-					dxDrawLine(v.x+v.width-((v.width*6.5)/100)+((v.width*6.5/100)*40/100),v.y+((v.height*5/100)*40/100),v.x+v.width-((v.width*6.5)/100)+(((v.width*6.5)/100)*60/100),v.y+(v.height*5/100)-((v.height*5/100)*40/100),tocolor(255,255,255,255),3,true)
-					dxDrawLine(v.x+v.width-((v.width*6.5)/100)+(((v.width*6.5)/100)*60/100),v.y+((v.height*5/100)*40/100),v.x+v.width-((v.width*6.5)/100)+((v.width*6.5/100)*40/100),v.y+(v.height*5/100)-((v.height*5/100)*40/100),tocolor(255,255,255,255),3,true)
-
-				end
+			dxDrawDxWindow(v.x, v.y, v.width, v.height, v.barcolor,  v.backcolor,v.bordercolor,false)
 			
-			dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+(v.height*5/100), v.titlecolor, 1.4, "default-bold" ,'center','center',true,false,true)
+			dxDrawText ( v.text, v.x+(v.width*6.5/100), v.y, v.x+v.width-(v.width*6.5/100), v.y+(v.height*5/100), v.titlecolor, 1.4, "default-bold" ,'center','center',true,false,true)
 end,
 ['Button']=function(v)
 				if isMouseInPosition(v.x,v.y,v.width,v.height) then
@@ -32,6 +21,51 @@ end,
 				local alpha = bitExtract(v.backcolor, 24, 8) 
 				
 				v.backcolor=tocolor(red,green,blue,255)
+				  
+				  if not v.isincreas then
+				  
+				v.buttoneffectx=v.buttoneffectx+0.3
+				v.buttoneffecty=v.buttoneffecty+0.3
+				
+				if v.buttoneffectx> (v.width*5/100) then
+				
+				v.buttoneffect=v.width*5/100
+				
+				v.isincreas=true
+				
+				end	
+
+				if v.buttoneffecty> (v.height*5/100) then
+				
+				v.buttoneffect=v.width*5/100
+				
+				v.isincreas=true
+				
+				end
+				
+				else
+				
+				v.buttoneffectx=v.buttoneffectx-0.3
+				v.buttoneffecty=v.buttoneffecty-0.3
+				
+				if v.buttoneffectx< 0 then
+				
+				v.buttoneffect=0
+				
+				v.isincreas=false
+				
+				end	
+
+				if v.buttoneffecty<0 then
+				
+				v.buttoneffect=0
+				
+				v.isincreas=false
+				
+				end
+				
+				
+				end
 				
 				else
 				
@@ -43,16 +77,23 @@ end,
 				
 				local alpha = bitExtract(v.backcolor, 24, 8) 
 				
-				v.backcolor=tocolor(red,green,blue,125)
+				v.backcolor=tocolor(red,green,blue,150)
+				v.buttoneffectx=0
+				v.buttoneffecty=0
+				
 				
 				end
 				
-					roundedRectangle(v.x,v.y,v.width,v.height,v.backcolor,v.bordercolor,true)
+					dxDrawRoundUpButton(v.x+v.buttoneffectx,v.y+v.buttoneffecty,v.width-(v.buttoneffectx*2),v.height-(v.buttoneffecty*2),v.backcolor,true)
+					
+
 					
 					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor, 1.15, "default-bold" ,'center','center',true,false,true)
 
 end,
 ['Edit']=function(v)
+
+local widthof=(dxGetTextWidth(v.text,1.15,'default-bold')/2)
 					if v.isenabled then
 					
 				local blue = bitExtract(v.backcolor, 0, 8) 
@@ -64,6 +105,24 @@ end,
 				local alpha = bitExtract(v.backcolor, 24, 8) 
 				
 				v.backcolor=tocolor(red,green,blue,255)
+				v.textcolor=v.orignalcolor
+				v.distanc2=v.distanc2+10
+				
+				widthof=0
+				
+				if v.distanc2>v.width then
+				
+				v.distanc2=v.width
+				
+				end
+				
+				v.distanc1=v.distanc1-10
+				
+				if v.distanc1<0 then
+				
+					v.distanc1=0
+				
+				end
 				
 				else
 				
@@ -74,19 +133,50 @@ end,
 				local red = bitExtract(v.backcolor, 16, 8) 
 				
 
-				v.backcolor=tocolor(red,green,blue,125)
+				v.backcolor=tocolor(red,green,blue,150)
+				v.textcolor=v.anothercolor
+								
+				v.distanc1=v.distanc1+10
+				widthof=0
+				if v.distanc1>=v.width/2 then
+				
+				widthof=(dxGetTextWidth(v.text,1.15,'default-bold')/2)
+				
+				end
+				
+				
+				if v.distanc1>v.width/2 then
+				
+					v.distanc1=v.width/2
+					
+				
+				end
+
+				v.distanc2=v.distanc2-10
+				
+				if v.distanc2<0 then
+				
+				v.distanc2=0
+				
+				end
 				
 					end
 					
 					dxDrawRectangle(v.x,v.y,v.width,v.height,v.backcolor,true)
 					
-					dxDrawLine(v.x-1,v.y,v.x+v.width+1,v.y,v.bordercolor,1,true)--top
+					if v.distanc2>0 then
+					dxDrawLine(v.x,v.y+v.height,v.x+v.distanc2-1,v.y+v.height,v.bordercolor,1,true)
+					end
+					
+				--[[	dxDrawLine(v.x-1,v.y,v.x+v.width+1,v.y,v.bordercolor,1,true)--top
 					
 					dxDrawLine(v.x,v.y,v.x,v.y+v.height,v.bordercolor,1,true)--left
 					
 					dxDrawLine(v.x+v.width,v.y,v.x+v.width,v.y+v.height,v.bordercolor,1,true)--right
 					
 					dxDrawLine(v.x-1,v.y+v.height,v.x+v.width+1,v.y+v.height,v.bordercolor,1,true)--bottom
+					
+					]]--
 	
 
 	
@@ -99,7 +189,9 @@ end,
 		dxDrawText("|", v.x+v.width-dxGetTextWidth( '|',1.15,"default-bold")-2, v.y, v.x+v.width+dxGetTextWidth( '|',1.15,"default-bold")+2, v.y+v.height, tocolor(255,0,0,255), 1.15, "default-bold", "left", "center", false, false, true)
 		end
 	end
-					dxDrawText ( v.text, v.x+1, v.y, v.x+v.width-1, v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'center',true,false,true)
+					
+					dxDrawText ( v.text, v.x+v.distanc1-widthof, v.y, v.x+v.width-1, v.y+v.height, v.orignalcolor, 1.15, "default-bold" ,v.position,'center',true,false,true)
+					
 					
 		end,
 
@@ -133,14 +225,22 @@ end,
 					
 					dxDrawRectangle(v.x,v.y,v.width,v.height,v.backcolor,true)
 					
-					dxDrawLine(v.x-1,v.y,v.x+v.width+1,v.y,v.bordercolor,1,true)--top
+					dxDrawLine(v.x,v.y,v.x+v.width-1,v.y,v.bordercolor,1,true)--top
 					
 					dxDrawLine(v.x,v.y,v.x,v.y+v.height,v.bordercolor,1,true)--left
 					
 					dxDrawLine(v.x+v.width,v.y,v.x+v.width,v.y+v.height,v.bordercolor,1,true)--right
 					
-					dxDrawLine(v.x-1,v.y+v.height,v.x+v.width+1,v.y+v.height,v.bordercolor,1,true)--bottom
-					
+					dxDrawLine(v.x,v.y+v.height,v.x+v.width-1,v.y+v.height,v.bordercolor,1,true)--bottom
+						if v.isenabled then
+		
+		local mywidth = getCurrentPositionOFCursor(v)
+		if v.x+3+mywidth< v.x+v.width then
+		dxDrawText("|",v.x+1+mywidth, v.y+(dxGetFontHeight(1.15,'default-bold')*(v.lineposition-1)), v.x+dxGetTextWidth( '|',1.15,"default-bold")+1, v.y+(dxGetFontHeight(1.15,'default-bold')*v.lineposition), tocolor(255,0,0,255), 1.15, "default-bold", "left", "center", false, false, true)
+		else
+		dxDrawText("|", v.x+v.width-dxGetTextWidth( '|',1.15,"default-bold")-2, v.y+(dxGetFontHeight(1.15,'default-bold')*(v.lineposition-1)), v.x+v.width+dxGetTextWidth( '|',1.15,"default-bold")+2, v.y+(dxGetFontHeight(1.15,'default-bold')*v.lineposition), tocolor(255,0,0,255), 1.15, "default-bold", "left", "center", false, false, true)
+		end
+	end
 					
 					dxDrawText ( v.text, v.x+1, v.y, v.x+v.width-1, v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'top',true,true,true)
 					
@@ -154,18 +254,35 @@ end,
 		
 ['checkBox']=function(v)
 					
-					dxDrawText ( v.text, v.x+(v.width/8)+3, v.y, v.x+v.width-3-(v.width/8), v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'center',false,true,true)
 
+					dxDrawRectangle(v.x,v.y,v.width,v.height,v.backcolor,true)
+
+					
 						if v.isselected then
-							
-						dxDrawRectangle(v.x,v.y,v.width/8,v.height,v.selectcolor,true)
-						else
-						dxDrawRectangle(v.x,v.y,v.width/8,v.height,v.backcolor,true)
-							
+						
+						v.distanc=v.distanc+5
+						
+						if v.distanc>v.height then
+						
+							v.distanc=v.height
+						
 						end
+							else
+							
+						v.distanc=v.distanc-5
+						
+						if v.distanc<0 then
+						
+							v.distanc=2
+						
+						end
+						
+						end
+						
+							dxDrawRectangle(v.x,v.y,v.width,v.distanc,v.selectcolor,true)
 					
 					
-					
+					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'center',false,true,true)
 					
 		end,	
 
@@ -212,6 +329,7 @@ end,
 								dxDrawRectangle(s[k].x,s[k].y,s[k].width,s[k].height,s[k].backcolor,true)
 								
 									local nstr,old=getMaxStringForWidth(s[k].text,s[k].width,false,1.15,'default-bold')
+									
 										if old~=nstr then
 										
 										dxDrawText (  deleteLastCharacter(nstr),s[k].x,s[k].y,(s[k].x+s[k].width),(s[k].y+s[k].height), s[k].color,s[k].scale,s[k].font ,s[k].positiontext,'center',true,false,true)
@@ -424,9 +542,31 @@ addEventHandler('onClientGUIChanged',resourceRoot,function()
 		
 			local baba=getMemoBaba(source)
 			
-			if baba then
-
-				Elements[baba].text=guiGetText(source)
+			if baba then-----------------stoppedhere
+			if getTextNumbersOfLines(Elements[baba].text,Elements[baba].height,Elements[baba].width)>round((Elements[baba].height/dxGetFontHeight(1.15,'default-bold')),0) then
+			
+				local str=getMaxStringForWidth(Elements[baba].text,Elements[baba].width)
+				
+				local mytext=string.gsub(guiGetText(source),str,'')
+				
+				table.insert(Elements[baba].beforetext,str)
+				
+				Elements[baba].text=mytext
+				
+				else
+					if #Elements[baba].beforetext~=0 then
+					
+					local val=tostring(table.concat(Elements[baba].beforetext))
+										
+					Elements[baba].text=string.gsub(guiGetText(source),val,'')	
+					
+					else
+					
+					Elements[baba].text=guiGetText(source)
+					
+					end
+					
+				end
 			
 			end
 	end
@@ -493,3 +633,238 @@ addEventHandler('onClientKey',root,function(ch,pr)
 end
 )
 
+-----------------------------------move cursor memo
+--[[addEventHandler('onClientKey',root,function(ch,pr)
+	if pr then
+		local memo=getIsEnabledMemo() 
+		
+		if memo then
+		
+			if Elements[memo] and getTextNumbersOfLines(Elements[memo].text,Elements[memo].height,Elements[memo].width)>(Elements[memo].height/dxGetFontHeight(1.15,'default-bold')) then
+			
+				local str=getMaxStringForWidth(Elements[memo].text,Elements[memo].width)
+				
+				local mytext=string.gsub(Elements[memo].text,str,'')
+				
+				local str=str..string.sub(mytext,1,1)
+				
+				table.insert(Elements[memo].beforetext,str)
+				
+				Elements[memo].text=string.gsub(Elements[memo].text,str,'')
+				
+			
+			end
+		
+		end
+
+	end
+end
+)]]--
+---------------------move window
+
+addEventHandler('onClientDxClick',root,function(btn,st,x,y)
+
+	if getElementType(source)=='dxWindow' then
+				
+			if st=='down' then
+					
+					if isMouseInPosition(Elements[source].x,Elements[source].y,Elements[source].width,Elements[source].height*5/100) then
+						
+						Elements[source].lastclickx=x
+						Elements[source].lastclicky=y
+						Elements[source].currentmove=true
+					
+					end
+				else
+				
+				Elements[source].currentmove=false
+			
+			end
+	end
+	
+end)
+
+
+addEventHandler('onClientCursorMove',root,function(_,_,x,y)
+
+	for k,v in ipairs(getElementsByType('dxWindow')) do
+
+		if Elements[v].visible and Elements[v].currentmove then
+		
+			local valx=0
+			local incx=false
+			local valy=0
+			local incy=false
+		
+			if x>Elements[v].lastclickx then
+		
+				valx=x-Elements[v].lastclickx
+				incx=true
+				
+				else
+				
+				valx=Elements[v].lastclickx-x
+				
+			end
+			
+			if y>Elements[v].lastclicky then
+			
+				valy=y-Elements[v].lastclicky
+				incy=true
+				
+				else
+				
+				valy=Elements[v].lastclicky-y
+			
+			end
+			Elements[v].lastclickx=x
+			Elements[v].lastclicky=y
+			
+			triggerEvent('onClientDxWindowMove',v,valx,valy,incx,incy)
+			break
+			
+		end
+	
+	end
+	
+end)
+
+
+addEventHandler('onClientDxWindowMove',root,function(valx,valy,incx,incy)
+	local oldposx=Elements[source].x
+	local oldposy=Elements[source].y
+	local resultx,resulty=0,0
+	
+	
+	if incx then
+	
+		Elements[source].x=Elements[source].x+valx
+		
+			resultx=Elements[source].x-oldposx
+			
+		else
+		
+		Elements[source].x=Elements[source].x-valx
+		
+		resultx=oldposx-Elements[source].x
+	
+	end
+	
+	if incy then
+	
+		Elements[source].y=Elements[source].y+valy
+		
+		resulty=Elements[source].y-oldposy
+		
+		else
+		
+		Elements[source].y=Elements[source].y-valy
+		
+		resulty=oldposy-Elements[source].y
+	
+	end
+	
+	
+	
+	local ch=getElementChildren(source)
+		if	#ch~=0 then
+			
+			for k,v in ipairs(ch)do
+			
+			triggerEvent('onClientParentChangePosition',v,source,Elements[source].x,Elements[source].y,oldposx,oldposy,incx,incy,resultx,resulty)
+		
+			end
+			
+		end
+end)
+
+
+
+
+addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy,checkx,valy)
+
+		local x,y=Elements[source].x,Elements[source].y
+		
+	local mex=checkx
+	
+	if incy then
+	
+		dxSetPosition(source,x,y+valy)
+		
+		if getElementType(source)=='dxEdit' then
+		
+			guiSetPosition(Elements[source].edit,x,y+valy,false)
+	
+		end		
+		
+		if getElementType(source)=='dxMemo' then
+		
+			guiSetPosition(Elements[source].memo,x,y+valy,false)
+	
+		end
+		
+		else
+		
+		dxSetPosition(source,x,y-valy)
+	
+	
+		if getElementType(source)=='dxEdit' then
+		
+			guiSetPosition(Elements[source].edit,x,y-valy,false)
+	
+		end
+	
+		if getElementType(source)=='dxMemo' then
+		
+			guiSetPosition(Elements[source].memo,x,y-valy,false)
+	
+		end
+	
+	end
+	
+		
+	
+end)
+
+addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy,checkx,valy)
+
+		local x,y=Elements[source].x,Elements[source].y
+		
+	local mex=checkx
+	
+		
+	if incx then
+	
+		dxSetPosition(source,x+mex,y)
+		
+		if getElementType(source)=='dxEdit' then
+		
+			guiSetPosition(Elements[source].edit,x+mex,y,false)
+	
+		end
+				
+		if getElementType(source)=='dxMemo' then
+		
+			guiSetPosition(Elements[source].memo,x+mex,y,false)
+	
+		end
+		
+		else
+		
+		dxSetPosition(source,x-mex,y)
+		
+		if getElementType(source)=='dxEdit' then
+		
+			guiSetPosition(Elements[source].edit,x-mex,y,false)
+	
+		end
+	
+		if getElementType(source)=='dxMemo' then
+		
+			guiSetPosition(Elements[source].memo,x-mex,y,false)
+	
+		end
+	
+	end		
+	
+end)
