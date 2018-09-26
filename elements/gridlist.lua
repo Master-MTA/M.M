@@ -1,6 +1,6 @@
 
 function dxCreateGridList(x,y,width,height,baba,backcolor,bordercolor,linecolor)
-local backcolor=backcolor  or tocolor(0,0,0,255)
+local backcolor=backcolor  or tocolor(187,187,187,125)
 local bordercolor=bordercolor  or tocolor(255,0,0,255)
 local linecolor=linecolor  or tocolor(255,255,255,255)
 local element=createElement('dxGridList')
@@ -53,7 +53,7 @@ local baba=baba or false
 end
 
 
-function dxGidListAddColumn(grid,title,colwidth,color)
+function dxGridListAddColumn(grid,title,colwidth,color)
 	
 	if Elements[grid] and Elements[grid].type=='gridList' then
 
@@ -165,7 +165,7 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 		
 		local font=font or 'default-bold'
 		
-		local scale=scale or 1.15
+		local scale=scale or 1
 		
 		local backcolor=backcolor or tocolor(40,115,178,70)
 
@@ -236,7 +236,16 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 									end
 								
 								end
-							
+								
+									if not dxGetMaxRowNumber(grid) or row<=dxGetMaxRowNumber(grid) then
+									
+										
+										Elements[grid].visiblerowcount=Elements[grid].visiblerowcount+1
+										
+										table.insert(Elements[grid].visiblerows,Elements[grid].rows[row])	
+										
+									end
+															
 							return true
 						
 						end
