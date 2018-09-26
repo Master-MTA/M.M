@@ -980,13 +980,22 @@ addEventHandler('onClientCursorMove',root,function()
 						if isMouseInPosition(Elements[val].x,Elements[val].y,Elements[val].width,Elements[val].height) then
 						
 							Elements[val].isenterd=true
-
+							
+							if Elements[val].isalreadyenter~=true then
+							
 							triggerEvent('onClientDxCursorEnter',val)
+							
+							end
+							Elements[val].isalreadyenter=true
 							
 							for s,m in ipairs(createdElements)do
 			
 								if Elements[m].isenterd and m~=val then
-				
+								
+									Elements[m].isalreadyenter=false
+									
+									Elements[m].isenterd=false
+								
 									triggerEvent('onClientDxCursorLeave',m)
 				
 								end
@@ -1000,6 +1009,8 @@ addEventHandler('onClientCursorMove',root,function()
 							if Elements[val].isenterd then
 							
 								Elements[val].isenterd=false
+								
+								Elements[val].isalreadyenter=false
 							
 								triggerEvent('onClientDxCursorLeave',val)
 								
@@ -1007,7 +1018,9 @@ addEventHandler('onClientCursorMove',root,function()
 								
 								if Elements[val].isenterd==nil then
 								
-									Elements[va].isenterd=false
+									Elements[val].isenterd=false
+									
+									Elements[val].isalreadyenter=false
 								
 								end
 							
@@ -1015,12 +1028,25 @@ addEventHandler('onClientCursorMove',root,function()
 						
 						end
 						end
-						
-						triggerEvent('onClientDxCursorEnter',v)
+							Elements[v].isenterd=true
+							
+							if Elements[v].isalreadyenter~=true then
+							
+							triggerEvent('onClientDxCursorEnter',v)
+							
+							end
+							Elements[v].isalreadyenter=true
+							
+							
 						for s,m in ipairs(createdElements)do
 			
 							if Elements[m].isenterd and m~=v then
-				
+								
+								Elements[m].isenterd=false
+								
+								Elements[m].isalreadyenter=false
+								
+								
 								triggerEvent('onClientDxCursorLeave',m)
 				
 							end
@@ -1034,6 +1060,8 @@ addEventHandler('onClientCursorMove',root,function()
 						if Elements[v].isenterd then
 							
 								Elements[v].isenterd=false
+								
+								Elements[v].isalreadyenter=false
 							
 								triggerEvent('onClientDxCursorLeave',v)
 								
@@ -1042,6 +1070,8 @@ addEventHandler('onClientCursorMove',root,function()
 								if Elements[v].isenterd==nil then
 								
 									Elements[v].isenterd=false
+									
+									Elements[v].isalreadyenter=false
 								
 								end
 							
@@ -1050,11 +1080,22 @@ addEventHandler('onClientCursorMove',root,function()
 			
 			end
 			
-			triggerEvent('onClientDxCursorEnter',v)
+			Elements[v].isenterd=true
+			
+			if Elements[v].isalreadyenter~=true then
+			
+				triggerEvent('onClientDxCursorEnter',v)
+			end
+			
+			Elements[v].isalreadyenter=true
 			
 			for s,m in ipairs(createdElements)do
 			
 				if Elements[m].isenterd and m ~= v  then
+				
+					Elements[m].isenterd=false
+									
+					Elements[m].isalreadyenter=false
 				
 					triggerEvent('onClientDxCursorLeave',m)
 				
