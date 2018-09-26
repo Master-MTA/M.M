@@ -803,6 +803,32 @@ addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy
 	
 		end
 		
+		if getElementType(source)=='dxGridList' then
+		
+			for k,v in ipairs(Elements[source].rows)do
+		
+				for i,h in ipairs(v)do
+				
+					h.y=h.y+valy
+				
+				end
+			
+			end
+			
+			for k,v in ipairs(Elements[source].columns)do
+				
+				v.y=v.y+valy
+			
+			end
+			
+			if Elements[source].myscroll then
+			
+				Elements[Elements[source].myscroll].y=Elements[Elements[source].myscroll].y+valy
+				
+			end
+			
+		end
+		
 		else
 		
 		dxSetPosition(source,x,y-valy)
@@ -818,6 +844,32 @@ addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy
 		
 			guiSetPosition(Elements[source].memo,x,y-valy,false)
 	
+		end
+		
+		if getElementType(source)=='dxGridList' then
+		
+			for k,v in ipairs(Elements[source].rows)do
+		
+				for i,h in ipairs(v)do
+				
+					h.y=h.y-valy
+				
+				end
+			
+			end
+			for k,v in ipairs(Elements[source].columns)do
+				
+				v.y=v.y-valy
+			
+			end
+			
+			if Elements[source].myscroll then
+			
+				
+				Elements[Elements[source].myscroll].y=Elements[Elements[source].myscroll].y-valy
+				
+			end
+			
 		end
 	
 	end
@@ -848,7 +900,32 @@ addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy
 			guiSetPosition(Elements[source].memo,x+mex,y,false)
 	
 		end
+		if getElementType(source)=='dxGridList' then
 		
+			for k,v in ipairs(Elements[source].rows)do
+		
+				for i,h in ipairs(v)do
+				
+					h.x=h.x+mex
+				
+				end
+			
+			end
+			
+			for k,v in ipairs(Elements[source].columns)do
+				
+				v.x=v.x+mex
+			
+			end
+			
+			if Elements[source].myscroll then
+			
+				
+				Elements[Elements[source].myscroll].x=Elements[Elements[source].myscroll].x+mex
+				
+			end
+			
+		end
 		else
 		
 		dxSetPosition(source,x-mex,y)
@@ -863,6 +940,33 @@ addEventHandler('onClientParentChangePosition',root,function(_,_,_,_,_,incx,incy
 		
 			guiSetPosition(Elements[source].memo,x-mex,y,false)
 	
+		end	
+		if getElementType(source)=='dxGridList' then
+		
+			for k,v in ipairs(Elements[source].rows)do
+		
+				for i,h in ipairs(v)do
+				
+					h.x=h.x-mex
+				
+				end
+			
+			end
+			
+			for k,v in ipairs(Elements[source].columns)do
+				
+				v.x=v.x-mex
+			
+			end
+			
+			
+			if Elements[source].myscroll then
+			
+				
+				Elements[Elements[source].myscroll].x=Elements[Elements[source].myscroll].x-mex
+				
+			end
+			
 		end
 	
 	end		
