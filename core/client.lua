@@ -983,6 +983,16 @@ addEventHandler('onClientCursorMove',root,function()
 
 							triggerEvent('onClientDxCursorEnter',val)
 							
+							for s,m in ipairs(createdElements)do
+			
+								if Elements[m].isenterd and m~=val then
+				
+									triggerEvent('onClientDxCursorLeave',m)
+				
+								end
+			
+							end
+							
 							return
 							
 						else
@@ -1007,6 +1017,15 @@ addEventHandler('onClientCursorMove',root,function()
 						end
 						
 						triggerEvent('onClientDxCursorEnter',v)
+						for s,m in ipairs(createdElements)do
+			
+							if Elements[m].isenterd and m~=v then
+				
+								triggerEvent('onClientDxCursorLeave',m)
+				
+							end
+			
+						end
 						
 						return
 						
@@ -1032,6 +1051,16 @@ addEventHandler('onClientCursorMove',root,function()
 			end
 			
 			triggerEvent('onClientDxCursorEnter',v)
+			
+			for s,m in ipairs(createdElements)do
+			
+				if Elements[m].isenterd and m ~= v  then
+				
+					triggerEvent('onClientDxCursorLeave',m)
+				
+				end
+			
+			end
 			
 			return
 						
