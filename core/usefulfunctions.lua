@@ -17,6 +17,11 @@ function deleteLastCharacter(str)
 return(str:gsub("[%z\1-\127\194-\244][\128-\191]*$", ""))
 end
 
+function round(num, numDecimalPlaces)
+  local mult = 10^(numDecimalPlaces or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
 function roundedRectangle(x, y, w, h,backcolor ,bordercolor , postgui)
 	if (x and y and w and h) then
 
@@ -27,6 +32,73 @@ function roundedRectangle(x, y, w, h,backcolor ,bordercolor , postgui)
 		dxDrawRectangle(x - 1, y + 2, 1, h - 4, bordercolor, postgui)-- left
 		dxDrawRectangle(x + w, y + 2, 1, h - 4, bordercolor, postgui)-- right
 	end
+end
+
+function dxDrawCutUpRectangle(x,y,width,height,color,postgui,topcolor,bordercolor)
+
+dxDrawRectangle(x,y+(height*5/100),width,height-(height*5/100),color,postgui)--down
+dxDrawRectangle(x+(width*6.5/100),y,width-(width*6.5/100),(height*5/100),topcolor,postgui)---top
+dxDrawRectangle(x,y,(width*6.5/100),(height*5/100),bordercolor,postgui)---chip left
+dxDrawRectangle(x+(width*93.5/100),y,(width*6.5/100),(height*5/100),bordercolor,postgui)---chip right
+dxDrawLine(x,y+(height*5/100),x,y+(height),bordercolor,1,postgui)--left
+dxDrawLine(x+(width)-1,y+(height*5/100),x+width-1,y+(height),bordercolor,1,postgui)--right
+dxDrawLine(x,y+(height)-1,x+width,y+(height)-1,bordercolor,1,postgui)--bottom
+
+
+end
+
+
+
+
+function dxDrawRoundUpButton(x, y, width, height, color,postgui)
+local radius=(height*5/100)/2
+   local width = width - (radius * 2)
+   local height = height -( radius * 2)
+  local  x = x + radius
+  local  y = y + radius
+
+        
+        dxDrawCircle(x, y+radius, radius*2, 180, 270, color, color, 7,1,postgui)
+        dxDrawCircle(x + width, y+radius, radius*2, 270, 360, color, color, 7,1,postgui)
+		dxDrawRectangle(x, y-radius, width, radius*2, color,postgui)
+        dxDrawRectangle(x-(radius*2), y+radius, width+(radius*4), height+radius, color,postgui)
+		
+
+end
+
+
+--[[
+
+function dxDrawRoundUpRectangle(x, y, width, height,topcolor, color,postgui)
+local radius=(height*5/100)/2
+   local width = width - (radius * 2)
+   local height = height -( radius * 2)
+  local  x = x + radius
+  local  y = y + radius
+
+        
+        dxDrawCircle(x, y+radius, radius*2, 180, 270, topcolor, topcolor, 7,1,postgui)
+        dxDrawCircle(x + width, y+radius, radius*2, 270, 360, topcolor, topcolor, 7,1,postgui)
+		dxDrawRectangle(x, y-radius, width, radius*2, topcolor,postgui)
+        dxDrawRectangle(x-(radius*2), y+radius, width+(radius*4), height+radius, color,postgui)
+		
+
+end]]--
+
+function dxDrawDxWindow(x, y, width, height,topcolor, color,bordercolor,postgui)
+
+dxDrawRectangle(x,y,width,(height*5/100),topcolor,postgui)---top rec
+
+dxDrawLine(x,y,x+width-1,y,bordercolor,1,postgui)--top top :D
+
+dxDrawLine(x,y,x,y+(height*5/100),bordercolor,1,postgui)--left top 
+
+dxDrawLine(x+width-1,y,x+width-1,y+(height*5/100),bordercolor,1,postgui)--right top 
+
+dxDrawRectangle(x,y+(height*5/100),width,height,color,postgui)
+
+dxDrawLine(x,y+(height*5/100),x+width-1,y+(height*5/100),bordercolor,1,postgui)--bottom top 
+
 end
 
 
@@ -219,7 +291,7 @@ end
 
 
 function dxSetVisible(element,stat)
-	if Elements[element] then
+	if isElement(element) then
 	
 		if not bannedelements[tostring(getElementType(element))] then
 				Elements[element].visible=stat
@@ -235,7 +307,7 @@ end
 
 
 function dxGetVisible(element)
-	if Elements[element] then
+	if isElement(element) then
 		return Elements[element].visible
 	else
 		outputDebugString('dxGetVisible Bad argument @1 expected element got '..type(element),3,255,0,0)
@@ -246,6 +318,21 @@ end
 function getIsEnabledEdit()
 
 for k,v in ipairs(getElementsByType('dxEdit'))do
+
+	if Elements[v].isenabled and Elements[v].visible then
+
+		return v
+	
+	end
+
+end
+
+return false
+
+end
+function getIsEnabledMemo()
+
+for k,v in ipairs(getElementsByType('dxMemo'))do
 
 	if Elements[v].isenabled and Elements[v].visible then
 
@@ -352,15 +439,11 @@ end
 
 function dxGetMaxRowNumber(grid)
 
-	for k,v in ipairs(Elements[grid].rows)do
-		
-		if v[1].y+v[1].height>Elements[grid].y+Elements[grid].height then
-		
-			return k
+if Elements[grid].rows[1] and Elements[grid].rows[1][1] then
 			
-		end
-	
-	end
+		return round(Elements[grid].height/Elements[grid].rows[1][1].height)
+
+end
 return false
 end
 
@@ -423,11 +506,13 @@ local num=dxGetMaxRowNumber(grid)
 
 
 			
-			
+			if Elements[grid].myscroll then
 			local ho=Elements[Elements[grid].myscroll].height-((Elements[Elements[grid].myscroll].height*me)/100)
 			
 				
 			Elements[Elements[grid].myscroll].heightofscroll=ho
+			
+			end
 			
 	end
 
@@ -561,13 +646,14 @@ return false
 
 end
 
-function dxSetPosition(el,mx,my)
+function dxSetPosition(el,myownx,myowny)
 	if Elements[el] and Elements[el].x and Elements[el].y then
-
-		 Elements[el].x=mx
-		 Elements[el].y=my
+		
+		 Elements[el].x=myownx
+		 Elements[el].y=myowny
 	return true
 	end
+	
 return false
 
 end
@@ -575,10 +661,12 @@ end
 
 function dxGetPosition(el)
 	if Elements[el] and Elements[el].x and Elements[el].y then
+	
 
 	return  Elements[el].x, Elements[el].y
 	
 	end
+	
 return false
 
 end
@@ -603,6 +691,36 @@ function dxGetPosition(el)
 	end
 return false
 
+end
+
+
+function getTextNumbersOfLines(text,borderwidth,scale,font)
+	
+	local scale=scale or 1
+	local font=font or 'default'
+
+	if dxGetTextWidth(text,scale,font)>borderwidth then---if it's in new line then
+		local mytext=''
+		local numoflines=1
+		for c in string.gmatch(text,"%w+") do
+
+			mytext=mytext..' '..c
+			local currentwidth=dxGetTextWidth(mytext,scale,font)
+			
+			if currentwidth>borderwidth then
+			
+				numoflines=numoflines+1
+				mytext=c
+		
+			end
+		end
+
+		return numoflines
+	
+	
+	end
+	
+return 1---else
 end
 
 
