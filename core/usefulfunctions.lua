@@ -48,21 +48,35 @@ dxDrawLine(x,y+(height)-1,x+width,y+(height)-1,bordercolor,1,postgui)--bottom
 end
 
 
+function dxDrawRoundedRectangle(x, y, rx, ry, color, radius,postgui)
+    rx = rx - radius * 2
+    ry = ry - radius * 2
+    x = x + radius
+    y = y + radius
+
+    if (rx >= 0) and (ry >= 0) then
+        dxDrawRectangle(x, y, rx, ry, color,postgui)
+        dxDrawRectangle(x, y - radius, rx, radius, color,postgui)
+        dxDrawRectangle(x, y + ry, rx, radius, color,postgui)
+        dxDrawRectangle(x - radius, y, radius, ry, color,postgui)
+        dxDrawRectangle(x + rx, y, radius, ry, color,postgui)
+
+        dxDrawCircle(x, y, radius, 180, 270, color, color, 7,1,postgui)
+        dxDrawCircle(x + rx, y, radius, 270, 360, color, color, 7,1,postgui)
+        dxDrawCircle(x + rx, y + ry, radius, 0, 90, color, color, 7,1,postgui)
+        dxDrawCircle(x, y + ry, radius, 90, 180, color, color, 7,1,postgui)
+    end
+end
+
+function dxDrawButton(x, y, width, height, color,bordercolor,postgui)
 
 
-function dxDrawRoundUpButton(x, y, width, height, color,postgui)
-local radius=(height*5/100)/2
-   local width = width - (radius * 2)
-   local height = height -( radius * 2)
-  local  x = x + radius
-  local  y = y + radius
-
-        
-        dxDrawCircle(x, y+radius, radius*2, 180, 270, color, color, 7,1,postgui)
-        dxDrawCircle(x + width, y+radius, radius*2, 270, 360, color, color, 7,1,postgui)
-		dxDrawRectangle(x, y-radius, width, radius*2, color,postgui)
-        dxDrawRectangle(x-(radius*2), y+radius, width+(radius*4), height+radius, color,postgui)
-		
+dxDrawRectangle(x, y, width, height, color,postgui)---button self
+---borders
+dxDrawLine(x,y,x+width-1,y,bordercolor,1,postgui)--top
+dxDrawLine(x,y,x,y+height,bordercolor,1,postgui)--left
+dxDrawLine(x+width-1,y,x+width-1,y+height,bordercolor,1,postgui)--right
+dxDrawLine(x,y+height,x+width-1,y+height,bordercolor,1,postgui)--bottom	
 
 end
 
@@ -87,17 +101,17 @@ end]]--
 
 function dxDrawDxWindow(x, y, width, height,topcolor, color,bordercolor,postgui)
 
-dxDrawRectangle(x,y,width,(height*5/100),topcolor,postgui)---top rec
+dxDrawRectangle(x,y,width,height,color,postgui)
+dxDrawRectangle(x,y,width,height*5/100,topcolor,postgui)
+
 
 dxDrawLine(x,y,x+width-1,y,bordercolor,1,postgui)--top top :D
 
-dxDrawLine(x,y,x,y+(height*5/100),bordercolor,1,postgui)--left top 
+dxDrawLine(x,y,x,y+height,bordercolor,1,postgui)--left  
 
-dxDrawLine(x+width-1,y,x+width-1,y+(height*5/100),bordercolor,1,postgui)--right top 
+dxDrawLine(x+width-1,y,x+width-1,y+height,bordercolor,1,postgui)--right  
 
-dxDrawRectangle(x,y+(height*5/100),width,height,color,postgui)
-
-dxDrawLine(x,y+(height*5/100),x+width-1,y+(height*5/100),bordercolor,1,postgui)--bottom top 
+dxDrawLine(x,y+height,x+width-1,y+height,bordercolor,1,postgui)--bottom  
 
 end
 
@@ -772,7 +786,6 @@ function getTextNumbersOfLines(text,borderwidth,scale,font)
 	
 return 1---else
 end
-
 
 
 function getDXRootElements()
