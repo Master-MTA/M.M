@@ -1,9 +1,10 @@
 
-function dxCreateWindow(x,y,width,height,text,backcolor,titlecolor,barcolor,bordercolor)
+function dxCreateWindow(x,y,width,height,text,backcolor,titlecolor,barcolor,bordercolor,sizeoftext)
 local backcolor=backcolor  or tocolor(0,0,0,255)
 local titlecolor=titlecolor  or tocolor(255,255,255,255)
-local barcolor=barcolor  or tocolor(40,115,178,255)
+local barcolor=barcolor  or tocolor(0,0,0,255)
 local bordercolor=bordercolor or tocolor(255,255,255,255)
+local sizeoftext=sizeoftext or (width/height)
 local element=createElement('dxWindow')
 	if element then
 		Elements[element]={
@@ -15,6 +16,7 @@ local element=createElement('dxWindow')
 		text=text,
 		backcolor=backcolor,
 		titlecolor=titlecolor,
+		sizeoftext=sizeoftext,
 		barcolor=barcolor,
 		visible=false,
 		currentmove=false,
@@ -24,7 +26,9 @@ local element=createElement('dxWindow')
 		lastclickx=0,
 		lastclicky=0,
 		}
+		
 		table.insert(createdElements,element)
+
 		return element
 	end
 	return false
