@@ -1,8 +1,8 @@
 
 function dxCreateGridList(x,y,width,height,baba,backcolor,bordercolor,linecolor)
-local backcolor=backcolor  or tocolor(187,187,187,125)
-local bordercolor=bordercolor  or tocolor(255,0,0,255)
-local linecolor=linecolor  or tocolor(255,255,255,255)
+local backcolor=backcolor  or tocolor(169,169,169,255)
+local bordercolor=bordercolor  or tocolor(255,255,255,255)
+local linecolor=linecolor  or tocolor(40,115,178,255)
 local element=createElement('dxGridList')
 local baba=baba or false	
 
@@ -12,6 +12,21 @@ local baba=baba or false
 		setElementParent(element,baba)
 		x=Elements[baba].x+x
 		y=Elements[baba].y+y+(Elements[baba].height*5/100)
+			if x+width>Elements[baba].x+Elements[baba].width then
+	
+		local res=(Elements[baba].width)-((x-Elements[baba].x))
+		
+		width=res
+	
+	end
+	
+	if y+height>Elements[baba].y+Elements[baba].height then
+	
+		local res=(Elements[baba].height-(Elements[baba].height*5/100))-((y)-(Elements[baba].y+(Elements[baba].height*5/100)))
+		
+		height=res
+	
+	end
 
 	end
 
@@ -160,6 +175,12 @@ end
 function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,font)
 
 	if Elements[grid] and Elements[grid].type=='gridList' then
+	
+				if Elements[grid].rows[1][1] and Elements[grid].rows[1][1].height then
+																									
+					Elements[grid].height=Elements[grid].rows[1][1].height*math.floor(Elements[grid].height/Elements[grid].rows[1][1].height)
+													
+				end
 
 		local ty=ty or 'text'
 		
@@ -167,7 +188,7 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 		
 		local scale=scale or 1
 		
-		local backcolor=backcolor or tocolor(40,115,178,70)
+		local backcolor=backcolor or tocolor(255,255,255,255)
 
 			if ty=='text' then
 	
@@ -177,7 +198,7 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 				
 					if theta then
 					
-					local color=color or Elements[grid].columns[colnum].color
+					local color=color or tocolor(0,0,0,255)
 					
 					local x,y,width,height=dxGridListGetColumnPosition(grid,colnum)
 					
@@ -204,12 +225,14 @@ function dxGridListSetItemText(grid,row,colnum,text,ty,color,backcolor,scale,fon
 											Elements[grid].unvisiblerowsdown={}
 											Elements[grid].visiblerowcount=0
 											Elements[Elements[grid].myscroll].distanc=0
-											
+											local me=0
 											for k=starty,endy do
 											Elements[grid].visiblerowcount=Elements[grid].visiblerowcount+1
 												table.insert(Elements[grid].visiblerows,Elements[grid].rows[k])
 											
+											
 											end
+												
 											
 											for k=endy+1,Elements[grid].rowcount do
 												table.insert(Elements[grid].unvisiblerowsdown,Elements[grid].rows[k])
