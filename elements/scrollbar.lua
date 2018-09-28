@@ -18,6 +18,21 @@ local element=createElement('dxScrollBar')
 		if Elements[baba].type=='gridList' then
 			
 		end
+			if x+width>Elements[baba].x+Elements[baba].width then
+	
+		local res=(Elements[baba].width)-((x-Elements[baba].x))
+		
+		width=res
+	
+	end
+	
+	if y+height>Elements[baba].y+Elements[baba].height then
+	
+		local res=(Elements[baba].height-(Elements[baba].height*5/100))-((y)-(Elements[baba].y+(Elements[baba].height*5/100)))
+		
+		height=res
+	
+	end
 	end
 		Elements[element]={
 		type='scrollBar',
@@ -39,6 +54,7 @@ local element=createElement('dxScrollBar')
 		lastclick=0,
 		}
 		table.insert(createdElements,element)
+
 		return element
 	end
 	return false
