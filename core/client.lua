@@ -5,22 +5,15 @@
 drawTable={
 ['Window']=function(v)
 
-			dxDrawDxWindow(v.x, v.y, v.width, v.height, v.barcolor,  v.backcolor,v.bordercolor,false)
+			dxDrawDxWindow(v.x, v.y, v.width, v.height, v.barcolor,  v.backcolor,v.bordercolor,true)
 			
 			dxDrawText ( v.text, v.x+(v.width*6.5/100), v.y, v.x+v.width-(v.width*6.5/100), v.y+(v.height*5/100), v.titlecolor, v.sizeoftext, "default-bold" ,'center','center',true,false,true)
 end,
 ['Button']=function(v)
 				if isMouseInPosition(v.x,v.y,v.width,v.height) then
 			
-				local blue = bitExtract(v.backcolor, 0, 8) 
+
 				
-				local green = bitExtract(v.backcolor, 8, 8) 
-				
-				local red = bitExtract(v.backcolor, 16, 8) 
-				
-				local alpha = bitExtract(v.backcolor, 24, 8) 
-				
-				v.backcolor=tocolor(red,green,blue,255)
 				  
 				  if not v.isincreas then
 				  
@@ -42,6 +35,7 @@ end,
 				v.isincreas=true
 				
 				end
+				
 				
 				else
 				
@@ -66,29 +60,22 @@ end,
 				
 				
 				end
+					dxDrawButton(v.x+v.buttoneffectx,v.y+v.buttoneffecty,v.width-(v.buttoneffectx*2),v.height-(v.buttoneffecty*2),v.backcolor2,v.bordercolor2,true)
+					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor2, v.textsize, "default-bold" ,'center','center',true,false,true)
 				
 				else
-				
-				local blue = bitExtract(v.backcolor, 0, 8) 
-				
-				local green = bitExtract(v.backcolor, 8, 8) 
-				
-				local red = bitExtract(v.backcolor, 16, 8) 
-				
-				local alpha = bitExtract(v.backcolor, 24, 8) 
-				
-				v.backcolor=tocolor(red,green,blue,150)
+
 				v.buttoneffectx=0
 				v.buttoneffecty=0
 				
+					dxDrawButton(v.x+v.buttoneffectx,v.y+v.buttoneffecty,v.width-(v.buttoneffectx*2),v.height-(v.buttoneffecty*2),v.backcolor,v.bordercolor,true)
+					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor, v.textsize, "default-bold" ,'center','center',true,false,true)
 				
 				end
 				
-					dxDrawRoundUpButton(v.x+v.buttoneffectx,v.y+v.buttoneffecty,v.width-(v.buttoneffectx*2),v.height-(v.buttoneffecty*2),v.backcolor,true)
 					
 
 					
-					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor, 1.15, "default-bold" ,'center','center',true,false,true)
 
 end,
 ['Edit']=function(v)
@@ -262,27 +249,32 @@ local widthof=(dxGetTextWidth(v.text,1.15,'default-bold')/2)
 						
 						v.distanc=v.distanc+5
 						
-						if v.distanc>v.height then
+						if v.distanc> (v.width*29/100)-(v.height*80/100) then
 						
-							v.distanc=v.height
+							v.distanc= (v.width*29/100)-(v.height*80/100)
 						
 						end
+						
 							else
 							
 						v.distanc=v.distanc-5
 						
 						if v.distanc<0 then
 						
-							v.distanc=2
+							v.distanc=0
 						
 						end
 						
-						end
 						
-							dxDrawRectangle(v.x,v.y,v.width,v.distanc,v.selectcolor,true)
+						end
 					
 					
-					dxDrawText ( v.text, v.x, v.y, v.x+v.width, v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'center',false,true,true)
+						
+						dxDrawRectangle ( v.x+(v.width*70/100), v.y+(v.height*10/100), v.width*29/100, v.height*80/100,v.backcolor2,true )
+						
+						dxDrawRectangle (v.x+(v.width*70/100)+v.distanc  , v.y+(v.height*10/100), (v.height*80/100), v.height*80/100,v.selectcolor,true )
+					
+					dxDrawText ( v.text, v.x+(v.width*20/100), v.y, v.x+v.width-(v.width*20/100), v.y+v.height, v.textcolor, 1.15, "default-bold" ,v.position,'center',false,true,true)
 					
 		end,	
 
@@ -1129,3 +1121,6 @@ addEventHandler('onClientCursorMove',root,function()
 
 end
 )
+
+---------------------this is when the another resource stop destroy elements of it
+-------when close the resource
