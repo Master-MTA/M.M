@@ -309,3 +309,62 @@ addEventHandler('onClientClick',root,function()
 	
 
 end)
+--------------------tab
+
+addEventHandler('onClientDxVisibleChange',root,function(st)
+	if Elements[source] and Elements[source].type=='tabPanel' then
+		for k,v in ipairs(Elements[source].tabs) do
+			Elements[v].visible=st
+		end
+	end
+end)
+addEventHandler('onClientDxVisibleChange',root,function(st)
+	if Elements[source] and Elements[source].type=='tabPanel' then
+		local sel=Elements[source].selectedtab
+		if st==true then
+			for k,v in ipairs(Elements[source].tabs) do
+				local ch=getElementChildren(v)
+				if #ch~=0 then
+					if v==sel then
+						for m,l in ipairs(ch)do
+							dxSetVisible(l,true)
+						end
+						else
+						for m,l in ipairs(ch)do
+							dxSetVisible(l,false)
+						end
+					end
+				end
+			end
+		end
+	end
+
+end)
+
+addEventHandler('onClientDxClick',root,function(btn,st)
+	if st=='down' then
+	
+		if  Elements[source].type=='Tab' then
+		
+			local parent=getElementParent(source)
+			local sel=Elements[parent].selectedtab
+			if sel then
+			Elements[sel].isselected=false		
+			for k,v in ipairs(getElementChildren(sel))do
+				dxSetVisible(v,false)
+			end
+			end			
+			Elements[source].isselected=true
+			Elements[parent].selectedtab=source
+
+
+			for k,v in ipairs(getElementChildren(source))do
+				dxSetVisible(v,true)
+			end
+			if sel then
+			triggerEvent('onClientDxTabChanged',source,sel)
+			end
+		end
+	
+	end
+end)
