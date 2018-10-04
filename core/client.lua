@@ -400,9 +400,39 @@ local widthof=(dxGetTextWidth(v.text,1.15,'default-bold')/2)
 	end,
 
 		
+['tabPanel']=function(v)
+		
+		if v.tabcount>=1 then 
+			
+			dxDrawRectangle(v.x,v.y+(v.height*5/100),v.width,v.height*95/100,v.backcolor,true)--the tabpanel it self
+
+			
+			for k,v in ipairs(v.tabs) do
+			local color=Elements[v].backcolor
+				local blue = bitExtract(color, 0, 8) 
+				
+				local green = bitExtract(color, 8, 8) 
+				
+				local red = bitExtract(color, 16, 8) 
+			if Elements[v].isselected then
+
+			color=tocolor(red,green,blue,255)
+			else
+
+			color=tocolor(red,green,blue,125)
+			end
+				dxDrawRectangle(Elements[v].x,Elements[v].y,Elements[v].width,Elements[v].height,color,true)
+				dxDrawText(Elements[v].text,Elements[v].x,Elements[v].y,Elements[v].x+Elements[v].width,Elements[v].y+Elements[v].height,Elements[v].color,Elements[v].fontsize,Elements[v].font,'center','center',true,true,true)
+
+			end
+			
+		end
+		
+	end,
+
+		
 
 }
-
 
 
 addEventHandler('onClientDxClick',root,function(btn,st)
@@ -475,26 +505,99 @@ end)
 
 addEventHandler('onClientClick',root,function(btn,st,x,y)
 	for k,v in pairs(Elements)do
-		if v.visible==true and v.type~='scrollBar' then
-			if isMouseInPosition(v.x,v.y,v.width,v.height) then
+	
+		if v.visible and v.type~='scrollBar' then
+		
+			if isMouseInPosition(v.x ,v.y,v.width,v.height) then
+	
 				local ch=getElementChildren(k)
-				for s,l in ipairs(ch)do
-					local hh=Elements[l]
-					if hh then
-					if isMouseInPosition(hh.x,hh.y,hh.width,hh.height) then
-					triggerEvent('onClientDxClick',l,btn,st,x,y)
-					return
-					else
-						if s==#ch then
-							triggerEvent('onClientDxClick',k,btn,st,x,y)
+				
+				if #ch~=0 then
+				
+					for key,value in ipairs(ch) do
+						
+						local me=Elements[value]-------def num 1
+						
+						if isMouseInPosition(me.x,me.y,me.width,me.height) and (me.visible) then
+							
+							local chx3=getElementChildren(value)
+							
+							if #chx3~=0 and me.type=='tabPanel' then
+							
+								for kj,vj in ipairs(chx3) do
+							
+									local mex3=Elements[vj]
+							
+									if isMouseInPosition(mex3.x,mex3.y,mex3.width,mex3.height) and (mex3.visible) then
+										
+										triggerEvent('onClientDxClick',vj,btn,st,x,y)
+									
+										return
+										
+										else
+										
+										local chx4=getElementChildren(vj)
+										
+											for ko,jo in ipairs(chx4) do
+											
+												local mex4 = Elements[jo]
+											
+												if isMouseInPosition(mex4.x,mex4.y,mex4.width,mex4.height) and (mex4.visible) then
+
+													triggerEvent('onClientDxClick',jo,btn,st,x,y)
+													
+													return
+												
+												end
+												
+											end
+								
+									end
+							
+								end
+							
+							end
+							
+							
+							triggerEvent('onClientDxClick',value,btn,st,x,y)
+						
 							return
-						end
-					end
-					end
-				end
-			end
-		end
-	end
+						
+						else------ if it's not in position
+						
+							if me.type=='Tab' and me.isselected then
+							
+								local chx2=getElementChildren(value)
+								
+								for kk,vv in ipairs(chx2) do
+								
+									local mex2=Elements[vv]----def num 2
+								
+									if isMouseInPosition(mex2.x,mex2.y,mex2.width,mex2.height) and mex2.visible then
+									
+										triggerEvent('onClientDxClick',vv,btn,st,x,y)
+									
+									end------------if clicked in element child tab
+								
+								end------------end loop if it's tab
+							
+							end----check if it's tab
+						
+						end----check if mousein position and visible
+					
+					end--------------loop if there first children
+				
+				end-------------end check ch
+				
+				triggerEvent('onClientDxClick',k,btn,st,x,y)
+				
+				return
+				
+			end-------------end check mouse
+			
+		end-----------check visible and type scroll
+		
+	end		------------------first loop	
 	
 	disableAllEdit()
 	disableAllMemo()
@@ -1123,4 +1226,22 @@ end
 )
 
 ---------------------this is when the another resource stop destroy elements of it
--------when close the resource
+function removeElementFromAllTables(element)
+	for k,v in ipairs(createdElements)do
+		if v==element then
+			table.remove(createdElements,k)
+		end
+	end
+	Elements[element]=nil
+		if isElement(element) then
+			destroyElement(element)
+		end
+end
+addEventHandler('onClientResourceStop',root,function(res)
+	if resElements[getResourceName(res)] and res~=getThisResource() then
+		for k,v in ipairs(resElements[getResourceName(res)] )do
+			removeElementFromAllTables(v)
+		end
+	end
+end)
+
