@@ -21,17 +21,38 @@ function round(num, numDecimalPlaces)
   local mult = 10^(numDecimalPlaces or 0)
   return math.floor(num * mult + 0.5) / mult
 end
+function dxDrawRoundedRectangle(x,y,width,height,raduis,color,postgui)
 
-function roundedRectangle(x, y, w, h,backcolor ,bordercolor , postgui)
-	if (x and y and w and h) then
+dxDrawRectangle(x,y+raduis,width+1,height-(raduis*2),color,postgui)--horezantal rectangle
+dxDrawRectangle(x+raduis,y,width-(raduis*2),height+1,color,postgui)--vertical rectangle
 
-		dxDrawRectangle(x, y, w, h, backcolor, postgui)
-		
-		dxDrawRectangle(x + 2, y - 1, w - 4, 1, bordercolor, postgui)-- top
-		dxDrawRectangle(x + 2, y + h, w - 4, 1, bordercolor, postgui)-- bottom
-		dxDrawRectangle(x - 1, y + 2, 1, h - 4, bordercolor, postgui)-- left
-		dxDrawRectangle(x + w, y + 2, 1, h - 4, bordercolor, postgui)-- right
-	end
+for k=180,270 do--left top
+	local co=math.cos(math.rad(k))* raduis
+	local si=math.sin(math.rad(k))* raduis
+	dxDrawLine((x+raduis)+co,(y+raduis)+si,x+raduis,y+raduis,color,1,postgui)
+end
+for k=270,360 do--right top
+	local co=math.cos(math.rad(k))* raduis
+	local si=math.sin(math.rad(k))* raduis
+	dxDrawLine((x+width-raduis)+co,(y+raduis)+si,x+width-raduis,y+raduis,color,1,postgui)
+end
+
+for k=90,180 do--left bottom
+	local co=math.cos(math.rad(k))* raduis
+	local si=math.sin(math.rad(k))* raduis
+	dxDrawLine((x+raduis)+co,(y+height-raduis)+si,x+raduis,y+height-raduis,color,1,postgui)
+end
+local k=360
+while(k<=(360+90))do
+if k~= 360 then
+	local co=math.cos(math.rad(k))* raduis
+	local si=math.sin(math.rad(k))* raduis
+	dxDrawLine((x-raduis+width)+co,(y+height-raduis)+si,x+width-raduis,y+height-raduis,color,1,postgui)
+	
+end
+	k=k+1;
+end
+
 end
 
 function dxDrawCutUpRectangle(x,y,width,height,color,postgui,topcolor,bordercolor)
