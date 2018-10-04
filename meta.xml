@@ -10,6 +10,7 @@
 	<script src='elements/gridlist.lua' type='client' chace='false'/>
 	<script src='elements/scrollbar.lua' type='client' chace='false'/>
 	<script src='elements/progressbar.lua' type='client' chace='false'/>
+	<script src='elements/tabpanel.lua' type='client' chace='false'/>
 	<script src='elements/radiobutton.lua' type='client' chace='false'/>
 	<script src='elements/image.lua' type='client' chace='false'/>
 	<script src='core/events.lua' type='client' chace='false'/>
