@@ -28,7 +28,10 @@ local element=createElement('dxWindow')
 		}
 		
 		table.insert(createdElements,element)
-
+			if sourceResource then
+			if not resElements[getResourceName(sourceResource)] then resElements[getResourceName(sourceResource)]={} end
+			table.insert(resElements[getResourceName(sourceResource)],element)
+			end
 		return element
 	end
 	return false
