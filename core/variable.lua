@@ -1,6 +1,7 @@
 Elements={}
 createdElements={}
 oldrow=0
+resElements={}
 bannedelements={
 ['dxGridListRow']=true,
 ['dxGridListColumn']=true,
