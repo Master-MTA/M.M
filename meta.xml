@@ -62,6 +62,8 @@
 	<export function="dxCreateWindow" type="client" />
 	<export function="dxCreateButton" type="client" />
 	<export function="dxCreateCheckBox" type="client" />
+	<export function="dxCreateTabPanel" type="client" />
+	<export function="dxCreateTab" type="client" />
 	<export function="dxCreateMemo" type="client" />
 	<export function="dxCreateLabel" type="client" />
 	<export function="dxCreateGridList" type="client" />
