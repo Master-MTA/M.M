@@ -18,7 +18,6 @@
 	<script src='core/usefulfunctions.lua' type='client' chace='false'/>
 	<script src='core/client.lua' type='client' chace='false'/>
 	<script src='core/client2.lua' type='client' chace='false'/>
-	<script src='test.lua' type='client' chace='false'/>
 	<script src='update/update.lua' type='server' />
 	<min_mta_version server="1.5.4-9.11342" />
 	<min_mta_version client="1.5.4-9.11342" />
