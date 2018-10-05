@@ -518,7 +518,7 @@ addEventHandler('onClientClick',root,function(btn,st,x,y)
 						
 						local me=Elements[value]-------def num 1
 						
-						if isMouseInPosition(me.x,me.y,me.width,me.height) and (me.visible) then
+						if me and isMouseInPosition(me.x,me.y,me.width,me.height) and (me.visible) then
 							
 							local chx3=getElementChildren(value)
 							
@@ -528,7 +528,7 @@ addEventHandler('onClientClick',root,function(btn,st,x,y)
 							
 									local mex3=Elements[vj]
 							
-									if isMouseInPosition(mex3.x,mex3.y,mex3.width,mex3.height) and (mex3.visible) then
+									if mex3 and isMouseInPosition(mex3.x,mex3.y,mex3.width,mex3.height) and (mex3.visible) then
 										
 										triggerEvent('onClientDxClick',vj,btn,st,x,y)
 									
@@ -542,7 +542,7 @@ addEventHandler('onClientClick',root,function(btn,st,x,y)
 											
 												local mex4 = Elements[jo]
 											
-												if isMouseInPosition(mex4.x,mex4.y,mex4.width,mex4.height) and (mex4.visible) then
+												if mex4 and isMouseInPosition(mex4.x,mex4.y,mex4.width,mex4.height) and (mex4.visible) then
 
 													triggerEvent('onClientDxClick',jo,btn,st,x,y)
 													
@@ -573,7 +573,7 @@ addEventHandler('onClientClick',root,function(btn,st,x,y)
 								
 									local mex2=Elements[vv]----def num 2
 								
-									if isMouseInPosition(mex2.x,mex2.y,mex2.width,mex2.height) and mex2.visible then
+									if mex2 and isMouseInPosition(mex2.x,mex2.y,mex2.width,mex2.height) and mex2.visible then
 									
 										triggerEvent('onClientDxClick',vv,btn,st,x,y)
 									
